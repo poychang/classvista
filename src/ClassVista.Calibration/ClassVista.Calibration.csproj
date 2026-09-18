@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Version>0.3.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ClassVista.Camera.Abstractions/ClassVista.Camera.Abstractions.csproj" />
+  </ItemGroup>
+</Project>

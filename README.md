@@ -61,9 +61,46 @@ dotnet publish src/ClassVista.App/ClassVista.App.csproj -c Release -r win-x64 --
 - 停止超過 5 秒：OpenCV 的原生讀取不保證支援取消。介面保持回應但等待驅動返回，可嘗試拔除裝置；仍卡住時需終止程式，報告可能缺少 `final`。正式強制中止保障需後續行程隔離或替換後端。
 - 不可將模擬測試 FPS 或佇列丟棄率作為 G1 驗收證據。
 
+## 離線 Calibration Profile
+
+0.3.0 新增 `ClassVista.Calibration` 函式庫，不依賴 OpenCV；目前僅有資料保存與驗證，尚未接入 WPF。
+建構 Profile 時所有欄位均需明確指定。JSON 屬性使用與 C# 相同的 PascalCase，大小寫敏感，拒絕未知／重複欄位、缺少必要欄位及非有限數值。
+
+| 欄位 | Schema v1 契約 |
+|---|---|
+| SchemaVersion | 必填整數 `1`；缺省不自動補版本，未知版本拒絕且不自動遷移 |
+| ProfileId / CreatedUtc | 非空白識別及非預設的 UTC 時間 |
+| RigId | 人工維護的架設版本；移動支架、鏡頭或變更光學設定後必須更新並重新校正 |
+| Projection | 僅接受 `planar`，只是目前資料契約，並非最終場域投影決策 |
+| PanoramaWidth / PanoramaHeight | 正整數，全景畫布像素尺寸 |
+| ValidRegion | `X`、`Y`、`Width`、`Height` 均必填；以左上角為原點，範圍不能超出畫布 |
+| Cameras | 至少一筆，ID 不可空白／重複；保留陣列順序，但相容性依 ID 配對 |
+| DeviceId / Width / Height | 與取像設定相同的裝置識別與輸入解析度 |
+| IntrinsicMatrix | 逐列排列的 3×3 內參，以像素為單位；正焦距及標準齊次格式 |
+| DistortionCoefficients | OpenCV 針孔模型順序；4／5／8／12／14 個值，不支援 fisheye 模型 |
+| Homography | 逐列排列的非退化 3×3 矩陣；由去畸變後、沿用原內參的影像像素座標映射至全景座標 |
+
+`ValidRegion` 只是宣告的矩形；驗證通過不保證實際有效像素、無黑邊、接縫品質或足以容納 1920×1080 Viewport。
+目前沒有 Undistort／Warp Map、Mask、投影運算或校正演算法。矩陣只做基本結構與退化檢查，不評估數值條件或校正誤差。
+`RigId` 不會自動偵測位移，裝置 ID 與解析度相同也不代表光學狀態未變。
+
+使用 `CalibrationProfileStore.SaveAsync(path, profile)` 保存；以 `LoadAsync(path)` 讀取並驗證結構。
+啟動檢查的呼叫端可使用 `LoadCompatibleAsync(path, currentCameraSettings, currentRigId)`，要求相機集合、各路尺寸與支架識別一致；目前 UI 尚未呼叫此 API。
+呼叫期間不要並行修改 Profile 中的陣列。
+
+寫入先驗證並序列化，再寫入同目錄的唯一暫存檔，完成後替換原檔；取消或失敗會清理暫存檔，不默默回到預設校正。
+此流程不提供備份或斷電耐久性保證。檔案路徑由呼叫端提供，建議日後使用 `%LOCALAPPDATA%/ClassVista/Calibration/`；目前不會自動建立實拍 Profile。
+`CalibrationProfileException.Error` 區分 `InvalidJson`、`UnsupportedVersion`、`InvalidProfile`、`IncompatibleSetup`，並提供繁體中文訊息；檔案不存在、權限及取消保留 .NET 原生例外供呼叫端處理。
+
+```powershell
+dotnet test tests/ClassVista.Tests/ClassVista.Tests.csproj -c Release --filter FullyQualifiedName~CalibrationProfileTests
+```
+
+測試資料全為人工建立，不能用於真實 Camera，也不能作為 G0／G1／G2 通過證據。
+
 ## 目前範圍
 
-0.2.0 是 Phase 0／1 的取像驗證原型，不是完整 Panorama MVP。
+WPF 0.2.0 是 Phase 0／1 的取像驗證原型；0.3.0 增加離線校正資料函式庫，仍不是完整 Panorama MVP。
 核心支援多路來源，目前 UI 提供兩路。佇列接收影格後擁有其生命週期；取出的影格改由消費者釋放。
 
 | 模組 | 狀態 |
@@ -72,7 +109,8 @@ dotnet publish src/ClassVista.App/ClassVista.App.csproj -c Release -r win-x64 --
 | Camera.Windows | DirectShow/OpenCV、模擬來源、背景工作、診斷報告 |
 | Diagnostics | 有界指標樣本及快照 |
 | App | WPF 雙路預覽及操作 |
-| FrameSync / Calibration / Panorama.Core | 未實作，待 G1 實機閘門 |
+| Calibration | 0.3.0 離線 Profile、JSON 讀寫及相容性 API；尚無實拍校正或 UI 整合 |
+| FrameSync / Panorama.Core | 未實作，待 G1 實機閘門 |
 
 到達時間使用 `Stopwatch` 單調時鐘；這不是攝影機感光時間，不能據此宣稱已量測端對端延遲。
 G1 需要真實雙攝影機 30 分鐘報告，通過前不進入拼接實作。尚未完成 Media Foundation 後端比較、硬體格式能力列舉、USB 頻寬量測及硬體丟幀計數。

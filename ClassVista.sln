@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassVista.Camera.Windows",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassVista.App", "src\ClassVista.App\ClassVista.App.csproj", "{C4D46E31-02CC-4586-BA6A-B6FB6208896B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassVista.Calibration", "src\ClassVista.Calibration\ClassVista.Calibration.csproj", "{AC992895-E546-44FF-B38A-CEC08408E7BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,18 @@ Global
 		{C4D46E31-02CC-4586-BA6A-B6FB6208896B}.Release|x64.Build.0 = Release|Any CPU
 		{C4D46E31-02CC-4586-BA6A-B6FB6208896B}.Release|x86.ActiveCfg = Release|Any CPU
 		{C4D46E31-02CC-4586-BA6A-B6FB6208896B}.Release|x86.Build.0 = Release|Any CPU
+		{AC992895-E546-44FF-B38A-CEC08408E7BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC992895-E546-44FF-B38A-CEC08408E7BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC992895-E546-44FF-B38A-CEC08408E7BD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AC992895-E546-44FF-B38A-CEC08408E7BD}.Debug|x64.Build.0 = Debug|Any CPU
+		{AC992895-E546-44FF-B38A-CEC08408E7BD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AC992895-E546-44FF-B38A-CEC08408E7BD}.Debug|x86.Build.0 = Debug|Any CPU
+		{AC992895-E546-44FF-B38A-CEC08408E7BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC992895-E546-44FF-B38A-CEC08408E7BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC992895-E546-44FF-B38A-CEC08408E7BD}.Release|x64.ActiveCfg = Release|Any CPU
+		{AC992895-E546-44FF-B38A-CEC08408E7BD}.Release|x64.Build.0 = Release|Any CPU
+		{AC992895-E546-44FF-B38A-CEC08408E7BD}.Release|x86.ActiveCfg = Release|Any CPU
+		{AC992895-E546-44FF-B38A-CEC08408E7BD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,5 +111,6 @@ Global
 		{776EA3AA-6804-4C19-B757-42E08BA1D699} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{7A89C02C-A0BD-4636-B7BB-606559B24ADA} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{C4D46E31-02CC-4586-BA6A-B6FB6208896B} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{AC992895-E546-44FF-B38A-CEC08408E7BD} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal

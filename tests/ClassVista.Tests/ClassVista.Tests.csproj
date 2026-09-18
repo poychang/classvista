@@ -14,5 +14,6 @@
     <ProjectReference Include="../../src/ClassVista.Diagnostics/ClassVista.Diagnostics.csproj" />
     <ProjectReference Include="../../src/ClassVista.Camera.Windows/ClassVista.Camera.Windows.csproj" />
     <ProjectReference Include="../../src/ClassVista.App/ClassVista.App.csproj" />
+    <ProjectReference Include="../../src/ClassVista.Calibration/ClassVista.Calibration.csproj" />
   </ItemGroup>
 </Project>

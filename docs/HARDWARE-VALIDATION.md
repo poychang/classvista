@@ -48,5 +48,11 @@
 
 ## 後續階段
 
-G1 通過後才開始 Intrinsic Calibration、固定 Warp/Profile、軟體同步、Feather Blend、Panorama 及可移動 Viewport。
+### 2026-09-18 開發環境盤點
+
+- 使用 `Get-PnpDevice -PresentOnly` 列舉 Camera／Image 類別，只有 HP FHD Camera 一台 Camera；EPSON L3550 Series 為掃描器。
+- 未開啟實體影像，沒有兩台同型 Camera 可執行 30 分鐘雙路測試；G0／G1 繼續標記未驗證，而非測試通過或實測失敗。
+- 依使用者授權先完成 0.3.0 離線 Profile 模型、讀寫與相容性測試；不構成硬體閘門例外核准或 G2 畫質驗收。
+
+G1 通過後才開始實拍 Intrinsic Calibration、固定 Warp 與場域 Profile 產生、軟體同步、Feather Blend、Panorama 及可移動 Viewport。
 其後仍需 G2～G5、2 小時 Soak Test、場域畫質驗收及正式部署文件。現階段不能宣稱達到完整 MVP Definition of Done。

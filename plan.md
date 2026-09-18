@@ -127,7 +127,7 @@ flowchart TD
 - [ ] 使用代表性課堂場景建立固定 Homography 或投影轉換。
 - [ ] 比較平面投影與圓柱投影，選擇直線變形與接縫較佳者。
 - [ ] 產生固定 Warp Map、有效像素 Mask、裁切邊界與初始 Seam Mask。
-- [ ] 定義 Calibration Profile 格式，包含 Camera 識別、解析度、矩陣與版本。
+- [x] 定義 Calibration Profile 格式，包含 Camera 識別、解析度、矩陣與版本。（0.3.0 離線 Schema v1；未代表實拍校正完成）
 - [ ] 實作啟動時的 Profile 相容性檢查；Camera、解析度或支架變更時要求重新校正。
 
 **交付物**
@@ -333,5 +333,7 @@ MVP 只有在以下條件全部成立時才視為完成：
 - 自動化測試涵蓋三路模擬取像、重連、取消、報告，以及真實 WPF 視窗中的雙路 1080p 模擬影格更新與停止。
 - **尚未通過 G0／G1**：沒有真實同型雙 Camera、固定參數能力確認、30 分鐘穩定性及端對端延遲／硬體丟幀率的驗收紀錄。
 - Phase 1 尚需媒體格式能力列舉、Media Foundation 後端比較、USB 頻寬與硬體丟幀量測；OpenCV 主機到達時間不能當成感光時間。
-- 依 G1 閘門要求，Phase 2～6 尚未進入；沒有校正、同步拼接、全景 Viewport 或完整 MVP 驗收。
+- **0.3.0**：依使用者授權先完成 Phase 2 的離線 Profile 資料模型、結構／版本／裝置相容性 API、JSON 讀寫及 24 項離線測試。啟動 UI 尚未整合，因此啟動檢查待辦維持未完成。
+- 本次裝置列舉僅有一台 HP FHD Camera；EPSON L3550 Series 為掃描器，不算第二台 Camera。沒有開啟實體影像，也沒有執行 30 分鐘雙路測試。
+- G0／G1 仍未驗證；僅允許離線資料基礎先行。實拍校正、同步拼接、全景 Viewport、Phase 3～6 及完整 MVP 驗收均未完成。
 - 操作與部署方式見 [README](README.md)，正式測試紀錄模板見 [硬體驗證表](docs/HARDWARE-VALIDATION.md)。
