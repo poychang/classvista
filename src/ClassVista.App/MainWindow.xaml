@@ -1,0 +1,49 @@
+<Window x:Class="ClassVista.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ClassVista | 課堂全景視界" Width="1320" Height="860"
+        MinWidth="960" MinHeight="720" Background="#F2F5F4"
+        FontFamily="Microsoft JhengHei UI" FontSize="14"
+        Loaded="WindowLoaded" Closing="WindowClosing">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Margin="0,0,0,20">
+            <StackPanel>
+                <TextBlock Text="ClassVista" FontSize="30" FontWeight="SemiBold" Foreground="#145B50" />
+                <TextBlock Text="課堂全景視界 / 取像驗證" Foreground="#58665F" Margin="0,4,0,0" />
+            </StackPanel>
+            <TextBlock Text="0.2.0 · Phase 1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#58665F" />
+        </Grid>
+        <DockPanel Grid.Row="1" Margin="0,0,0,16">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <Button x:Name="RefreshButton" Content="重新列舉" Click="RefreshClicked" />
+                <Button x:Name="StartButton" Content="開始取像" Click="StartClicked" Background="#145B50" Foreground="White" />
+                <Button x:Name="StopButton" Content="停止" Click="StopClicked" IsEnabled="False" />
+                <Button Content="報告資料夾" Click="ReportsClicked" />
+            </StackPanel>
+            <CheckBox x:Name="DiagnosticsToggle" Content="診斷資訊" IsChecked="True"
+                      HorizontalAlignment="Right" VerticalAlignment="Center" />
+        </DockPanel>
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid x:Name="CameraGrid" MinHeight="560">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        </Grid>
+        </ScrollViewer>
+        <Border Grid.Row="3" BorderBrush="#D1DAD5" BorderThickness="0,1,0,0" Padding="0,14,0,0" Margin="0,16,0,0">
+            <StackPanel>
+                <TextBlock x:Name="RunStatus" Text="待命" TextWrapping="Wrap" Foreground="#243A31" />
+                <TextBlock Text="校正：未建立   |   G1：待實機 30 分鐘驗證   |   Panorama：尚未啟用"
+                           Foreground="#725715" Margin="0,6,0,0" TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

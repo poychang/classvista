@@ -18,6 +18,7 @@ public sealed class LatestFrameQueue : IDisposable
     public long Dropped { get { lock (gate) return dropped; } }
     public int Count { get { lock (gate) return frames.Count; } }
 
+    // 呼叫後由佇列接管影格；取出最新影格時再移交給消費者。
     public void Enqueue(CameraFrame frame)
     {
         lock (gate)

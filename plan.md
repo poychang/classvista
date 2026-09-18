@@ -321,7 +321,17 @@ MVP 只有在以下條件全部成立時才視為完成：
 - [ ] 選定並取得兩台同型 Camera。
 - [ ] 確認手動 Exposure、White Balance、Focus 能力。
 - [ ] 盤點目標 Windows PC 與 USB Host Controller。
-- [ ] 建立 `ClassVista.sln` 與 `ClassVista.Camera.Abstractions`、`ClassVista.Camera.Windows`、`ClassVista.Diagnostics` 三個初始模組。
+- [x] 建立 `ClassVista.sln` 與 `ClassVista.Camera.Abstractions`、`ClassVista.Camera.Windows`、`ClassVista.Diagnostics` 三個初始模組。
 - [ ] 完成單路 1080p/30 取像與時間戳紀錄。
 - [ ] 擴充為雙路取像，執行第一輪 30 分鐘穩定性測試。
 - [ ] 依 G1 結果決定 Camera Pixel Format 與 USB 配置。
+
+## 13. 實作進度（2026-09-18）
+
+- **0.1.0**：完成影格資料模型、有界佇列、資源釋放、FPS 與時間診斷及單元測試。
+- **0.2.0**：完成 Windows DirectShow/OpenCV 取像原型、WPF 雙路預覽、模擬來源、手動參數要求、設定保存、中斷重試及 JSONL 診斷報告。
+- 自動化測試涵蓋三路模擬取像、重連、取消、報告，以及真實 WPF 視窗中的雙路 1080p 模擬影格更新與停止。
+- **尚未通過 G0／G1**：沒有真實同型雙 Camera、固定參數能力確認、30 分鐘穩定性及端對端延遲／硬體丟幀率的驗收紀錄。
+- Phase 1 尚需媒體格式能力列舉、Media Foundation 後端比較、USB 頻寬與硬體丟幀量測；OpenCV 主機到達時間不能當成感光時間。
+- 依 G1 閘門要求，Phase 2～6 尚未進入；沒有校正、同步拼接、全景 Viewport 或完整 MVP 驗收。
+- 操作與部署方式見 [README](README.md)，正式測試紀錄模板見 [硬體驗證表](docs/HARDWARE-VALIDATION.md)。

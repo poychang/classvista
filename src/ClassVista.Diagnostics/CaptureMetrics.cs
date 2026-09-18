@@ -36,6 +36,7 @@ public sealed class CaptureMetrics(long startedTimestamp)
     {
         lock (gate)
         {
+            now = Math.Max(now, lastTimestamp ?? startedTimestamp);
             var elapsed = Stopwatch.GetElapsedTime(startedTimestamp, now).TotalSeconds;
             var durations = samples.Select(sample => sample.ReadMs).Order().ToArray();
             var recentSeconds = samples.Count > 1
